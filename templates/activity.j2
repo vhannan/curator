@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+  <title>CURATOR | Inform, Inspire, Optimize</title>
+  <link href="/static/vendor/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/static/vendor/css/keen-dashboards.css" rel="stylesheet">
+  <link href="/static/vendor/nvd3/nv.d3.min.css" rel="stylesheet">
+  <link href="/static/css/main.css" rel="stylesheet">
+  <link rel="shortcut icon" href="/static/favicon3.ico">
+
+</head>
+<body class="application">
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="../">
+          <span class="glyphicon glyphicon-chevron-left"></span>
+        </a>
+        <a class="navbar-brand" href="./">Curator</a>
+      </div>
+
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown-menu-right">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Links<b class="caret"></b></a>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="{{ url_for('dash') }}">Home</a></li>
+              <li><a href="{{ url_for('alerts') }}">Alerts</a></li>
+            </ul>
+        </li>
+          <li class="dropdown-menu-right">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Domain Group<b class="caret"></b></a>
+              <ul id="domain_selector" class="dropdown-menu" name = "domain_groups">
+                {% for domain_group in domain_groups %}
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{domain_group}}</a></li>
+                {% endfor %}
+              </ul>
+          </li>
+          <li class="dropdown-menu-right">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Clients<b class="caret"></b></a>
+              <ul id="client_selector" class="dropdown-menu" name = "clients">
+                {% for clientname in clientnames %}
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{clientname}}</a></li>
+                {% endfor %}
+              </ul>
+          </li>
+          <li class="dropdown-menu-right">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Offers<b class="caret"></b></a>
+              <ul id="offer_selector" class="dropdown-menu" name='offers'>
+                {% for offer in offers %}
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{offer}}</a></li>
+                {% endfor %}
+              </ul>
+          </li>
+          <li class="dropdown-menu-right">
+              <a href="#" data-toggle="dropdown" class="dropdown-toggle">Sender Domains<b class="caret"></b></a>
+              <ul id="sender_domain_selector" class="dropdown-menu" name='sender_domains'>
+                {% for sender_domain in sender_domains %}
+                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{{sender_domain}}</a></li>
+                {% endfor %}
+              </ul>
+          </li>
+      </ul>
+  </div><!-- /.navbar-collapse -->
+    </div>
+  </div>
+
+
+  <div class="container-fluid">
+    <div class="row">
+
+
+        <div class="col-sm-12">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Smoothed send stats
+          </div>
+          <div class="chart-stage">
+            <div >
+              <svg style='height:700px' id="send_activity"/>
+            </div>
+          </div>
+          <div class="chart-notes">
+            Send stats smoothed over a 2-day moving average
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </div>
+
+    <p class="small text-muted">Built with &#9829; by VH</p>
+
+  </div>
+
+
+
+  <!--  <script src="./static/vendor/js/keen.min.js"></script> /.navbar-collapse -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="/static/vendor/js/d3.js"></script>
+  <script src="/static/vendor/nvd3/nv.d3.min.js"></script>
+  <script src="/static/js/activity.js"></script>
+
+
+</body>
+</html>

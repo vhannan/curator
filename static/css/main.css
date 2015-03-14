@@ -1,0 +1,39 @@
+.chart-wrapper .chart-stage {
+  min-height: 109px;
+
+}
+
+h5 {color: #666; 
+}
+
+.grid .tick {
+    stroke: lightgrey;
+    stroke-opacity: 0.6;
+    shape-rendering: crispEdges;
+}
+.grid path {
+          stroke-width: 0;
+}
+
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: auto;
+  position: relative;
+}
+
+text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+form {
+  right: 10px;
+  top: 10px;
+}
