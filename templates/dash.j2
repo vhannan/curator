@@ -26,17 +26,12 @@
         </a>
         <a class="navbar-brand" href="./">Curator</a>
       </div>
-
-      <!-- <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-
-      </ul> -->
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown-menu-right">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Links<b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ url_for('activity') }}">Activity</a></li>
-              <li><a href="{{ url_for('alerts') }}">Alerts</a></li>
+              <li class="disabled"><a href="{{ url_for('alerts') }}">Alerts</a></li>
             </ul>
         </li>
           <li class="dropdown-menu-right">

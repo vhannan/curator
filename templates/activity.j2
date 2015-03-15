@@ -26,14 +26,16 @@
         </a>
         <a class="navbar-brand" href="./">Curator</a>
       </div>
-
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav navbar-right">
+          <li class="btn btn-primary btn-xs navbar-btn">
+          <button type="button" id="reset_button" class="btn btn-primary btn-sm">Reset</button>
+        </li>
         <li class="dropdown-menu-right">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Links<b class="caret"></b></a>
             <ul class="dropdown-menu" role="menu">
               <li><a href="{{ url_for('dash') }}">Home</a></li>
-              <li><a href="{{ url_for('alerts') }}">Alerts</a></li>
+              <li class="disabled"><a href="{{ url_for('alerts') }}">Alerts</a></li>
             </ul>
         </li>
           <li class="dropdown-menu-right">
