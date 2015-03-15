@@ -54,13 +54,6 @@ def activity(client):
         WHERE (t1.weight > 0 or t1.gmail_weight > 0)
         AND client = '{0}'
         '''.format(client)
-
-    # if domain_groups != 'all' and domain_groups != None:
-    #     query_head += ''' AND t2.domain_group = '{0}' '''.format(domain_groups)
-    # if offers != 'all' and offers != None:
-    #     query_head += ''' AND t1.offer = '{0}' '''.format(offers)
-    # if sender_domains != 'all' and sender_domains != None:
-    #     query_head += ''' AND t2.sending_domain = '{0}' '''.format(sender_domains)
     query_head += '''Group by clients, offers, sender_domains, domain_groups'''
     query = query_head
     raw = pd.DataFrame(cursor.execute(query).fetchall());
@@ -196,7 +189,6 @@ def records_hotmail(client='all'):
     if client != 'all':
         query_head += '''AND client = '{0}' '''.format(client)
     query_head += '''GROUP BY received_date, email_received '''
-
     query = query_head
     output = utils.preprocess_records(query, cursor, 'received_date', 'email_received')
     return utils.jsonify(output)
@@ -214,7 +206,6 @@ def records_aol(client='all'):
     if client != 'all':
         query_head += '''AND client = '{0}' '''.format(client)
     query_head += '''GROUP BY received_date, email_received '''
-
     query = query_head
     output = utils.preprocess_records(query, cursor, 'received_date', 'email_received')
     return utils.jsonify(output)
@@ -225,10 +216,6 @@ def send_activity(client='avenue100', offer='all', domain_group='all', sender_do
     offer = request.args.get('offer')
     domain_group = request.args.get('domain_group')
     sender_domain = request.args.get('sender_domain')
-    print client
-    print offer
-    print domain_group
-    print sender_domain
     query_head = '''
      SELECT
         	senddate,
@@ -240,7 +227,7 @@ def send_activity(client='avenue100', offer='all', domain_group='all', sender_do
         FROM
     	   honeybadger_scratch.dashboard_send_activity
         WHERE
-        	senddate > CURRENT_DATE - INTERVAL 60 DAY
+        	senddate > CURRENT_DATE - INTERVAL 45 DAY
             and senddate < current_date
         AND client = '{0}'
     '''.format(client)
@@ -254,9 +241,7 @@ def send_activity(client='avenue100', offer='all', domain_group='all', sender_do
 
     query_head += '''Group by 1,2'''
     query = query_head
-
     query = query_head
-    print query
     output = utils.preprocess_send_activity(query, engine, 'senddate', 'client')
     return utils.jsonify(output)
 

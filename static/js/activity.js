@@ -57,6 +57,15 @@ function getURLParameter(name) {
 }
 
 
+
+$("#reset_button").click(function () {
+    global_domain_groups = "all";
+    global_sender_domains = "all"
+    global_offers = "all";
+    draw_charts(global_clients, global_offers, global_domain_groups, global_sender_domains);
+});
+
+
 $("#offer_selector li").click(function () {
     global_offers = $(this).text();
     draw_charts(global_clients, global_offers, global_domain_groups, global_sender_domains);
@@ -89,16 +98,19 @@ $(function() {
 
 });
 
+
+
+
 $(document).ready(function() {
-  alert("do I get here?")
   var url = window.location.pathname;
-  alert (url)
-  var getClient = url.split("/").pop();
-  alert(getClient)
-    if (getClient != undefined || getClient != null || getClient !='client') {
-        global_clients = getClient
-        alert(global_clients)
-        draw_charts(global_clients, global_offers, global_domain_groups, global_sender_domains);
+  var getClient = url.split("/").pop().replace(/ /g,'');
+  console.log(getClient)
+  if (getClient === "client") {
+        global_clients = 'avenue100'
+         }
+  else {
+     global_clients = getClient
+     draw_charts(global_clients, global_offers, global_domain_groups, global_sender_domains);
    }
 });
 
