@@ -51,11 +51,11 @@ function draw_charts(client, offer, domain_group, sender_domain){
 }
 
 
-function getParameterByName(name) {
-    var regex = new RegExp(name+"/([^&#]*)/"),
-        results = regex.exec(location.search);
-    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+
+function getURLParameter(name) {
+  return decodeURIComponent((new RegExp('\/' + name + '\/' + '(\w)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null
 }
+
 
 $("#offer_selector li").click(function () {
     global_offers = $(this).text();
@@ -81,22 +81,30 @@ $(function() {
   $("#client_selector li").click(function () {
 
         var data = {};
-        var client = $(this).text();
-        var url = "http://localhost:5000/activity/client/" + client;
+        global_clients = $(this).text();
+        var url = "http://localhost:5000/activity/client/" + global_clients;
         window.open (url,'_self',false);
-});
 
 });
 
+});
 
-var client = $(location).attr('<client>');
-alert(client)
-// var prodId = getParameterByName('prodId');
-// var prodId = getParameterByName('prodId');
-// var prodId = getParameterByName('prodId');
+$(document).ready(function() {
+  alert("do I get here?")
+  var url = window.location.pathname;
+  alert (url)
+  var getClient = url.split("/").pop();
+  alert(getClient)
+    if (getClient != undefined || getClient != null || getClient !='client') {
+        global_clients = getClient
+        alert(global_clients)
+        draw_charts(global_clients, global_offers, global_domain_groups, global_sender_domains);
+   }
+});
+
 
 function send_activity(client, offer, domain_group, sender_domain){
-  $.get('/api/send_activity',
+  $.get('/api/send_activity/',
 		 data = {client:client, offer:offer, domain_group:domain_group, sender_domain:sender_domain}
     ).then(
     function( data ) {
@@ -135,9 +143,6 @@ function send_activity(client, offer, domain_group, sender_domain){
  );
 
 }
-
-
-
 
 $( function() {
   MyApp.init();
